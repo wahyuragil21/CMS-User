@@ -16,7 +16,6 @@ module.exports = class usersController {
                 username: newUser.username,
             })
         } catch (error) {
-            console.log(error);
             next(error)
         }
     }
@@ -30,16 +29,12 @@ module.exports = class usersController {
             if (!user) throw ({ name: 'InvalidAccount' })
             
             const isMatch = comparePassword(password, user.password)
-            console.log(isMatch, "hasil match");
-            console.log(password, user.password);
-            
             if (!isMatch) throw ({ name: 'InvalidAccount' })
 
             const access_token = getToken({ id: user.id })
             res.status(200).json({ access_token })
         } catch (error) {
-            // console.log(error);
-            // next(error);
+            next(error);
         }
     }
 
@@ -54,7 +49,6 @@ module.exports = class usersController {
                 password: user.password,
             })
         } catch (error) {
-            console.log(error);
             next(error)
         }
     }
