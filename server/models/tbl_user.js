@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   tbl_user.init({
     username: {
-      type: DataTypes.STRING(128),
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: {
-      type: DataTypes.STRING(54),
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
