@@ -7,13 +7,13 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER(10)
+        type: Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING(128)
+        type: Sequelize.STRING
       },
       password: {
-        type: Sequelize.STRING(54)
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

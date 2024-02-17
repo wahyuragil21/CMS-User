@@ -10,6 +10,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
 app.post('/register', usersController.register)
+app.post('/login', usersController.login)
+app.get('/all-users', usersController.getUser)
+app.get('/user', usersController.getUserById)
+app.put('/update-user', usersController.updateProfile)
+app.delete('/del-user', usersController.deleteUser)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
