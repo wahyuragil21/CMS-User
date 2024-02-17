@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { hasPassword } = require('../helpers/bcrypt');
 module.exports = (sequelize, DataTypes) => {
   class tbl_user extends Model {
     /**
@@ -43,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {
+    hooks: {
+      beforeCreate : (user, options) => {
+        user.password = hasPassword(user.password)
+      }
+    },
     sequelize,
     modelName: 'tbl_user',
   });
