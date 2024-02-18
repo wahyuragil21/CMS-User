@@ -1,5 +1,5 @@
 const { getToken } = require("../helpers/jwt")
-const {comparePassword} = require("../helpers/bcrypt")
+const { comparePassword } = require("../helpers/bcrypt")
 const { tbl_user } = require("../models")
 const { Op } = require("sequelize");
 
@@ -8,7 +8,7 @@ module.exports = class usersController {
     static async register(req, res, next) {
         try {
             const user = await tbl_user.findOne({ where: { username: req.body.username } })
-            if (user) throw ({ name: 'alreadyExist' })
+            if (user) throw ({ name: 'alreadyExist'})
 
             const newUser = await tbl_user.create({ ...req.body })
             res.status(201).json({
@@ -23,11 +23,14 @@ module.exports = class usersController {
     static async login(req, res, next) {
         try {
             const { username, password } = req.body
+            
             if (!username || !password) throw ({ name: 'UsernameorPasswordRequired' })
-
+            
+            if (username !== 'admin') throw ({ name: 'Unauthorized' })
+            
             const user = await tbl_user.findOne({ where: { username } })
             if (!user) throw ({ name: 'InvalidAccount' })
-            
+
             const isMatch = comparePassword(password, user.password)
             if (!isMatch) throw ({ name: 'InvalidAccount' })
 
@@ -40,8 +43,7 @@ module.exports = class usersController {
 
     static async updateProfile(req, res, next) {
         try {
-
-            const user = await tbl_user.findByPk(req.query.user_id)
+            const user = await tbl_user.findByPk(req.body.id)
             await user.update({ ...req.body })
 
             res.status(201).json({
@@ -59,7 +61,7 @@ module.exports = class usersController {
                 where: {
                     username: {
                         [Op.not]: 'admin'
-                    } 
+                    }
                 },
                 attributes: { exclude: ['updatedAt'] }
             })
@@ -87,7 +89,7 @@ module.exports = class usersController {
             res.status(200).json({
                 message: 'user has been deleted'
             })
-        }catch(error) {
+        } catch (error) {
             next(error)
         }
     }

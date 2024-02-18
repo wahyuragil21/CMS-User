@@ -17,7 +17,7 @@ module.exports = (error, req, res, next) => {
 
         case 'alreadyExist':
             status = 400
-            message = 'User already exist'
+            message = ['User already exist!']
             break;
 
         case 'NotFound':
@@ -27,6 +27,7 @@ module.exports = (error, req, res, next) => {
 
         case 'InvalidToken':
         case 'JsonWebTokenError':
+        case 'Unauthorized':
             status = 401
             message = 'Unauthorized'
             break;
@@ -43,5 +44,5 @@ module.exports = (error, req, res, next) => {
     }
     res.status(status).json({ message })
 
-    // console.log(message, '<<<<<<<<<<<<<<<');
+    console.log(message, '<<<<<<<<<<<<<<<');
 }
