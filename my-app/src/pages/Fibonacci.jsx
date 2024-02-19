@@ -43,7 +43,7 @@ export default function Fibonacci() {
                     </div>
                 </div>
                 <div className="rounded-lg p-4">
-                    <table className="table-auto mx-auto">
+                    <table className="mt-10 table-auto mx-auto">
                         <tbody>
                             {arr.map((row, rowIndex) => (
                                 <tr key={rowIndex}>

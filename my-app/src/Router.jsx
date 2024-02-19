@@ -20,6 +20,10 @@ const router = createBrowserRouter([
         path: "/",
         element: < LandingPage />
     },
+    // {
+    //     path: "/fibonacci",
+    //     element: < Fibonacci />
+    // },
     {
         path: "/dashboard",
         element: <DashboardCMS />,
@@ -41,6 +45,7 @@ const router = createBrowserRouter([
                 path: "fibonacci",
                 element: < Fibonacci />
             },
+
         ],
     }
 ]);
